@@ -9,6 +9,16 @@ export namespace Images {
 }
 
 export namespace Spritesheets {
+    export class SpritesheetsMainCharacter64647 {
+        static getName(): string { return 'main-character.[64,64,7,0,0]'; }
+
+        static getPNG(): string { return require('assets/spritesheets/main-character.[64,64,7,0,0].png'); }
+        static getFrameWidth(): number { return 64; }
+        static getFrameHeight(): number { return 64; }
+        static getFrameMax(): number { return 7; }
+        static getMargin(): number { return 0; }
+        static getSpacing(): number { return 0; }
+    }
     export class SpritesheetsMetalslugMummy374518 {
         static getName(): string { return 'metalslug_mummy.[37,45,18,0,0]'; }
 
@@ -19,16 +29,6 @@ export namespace Spritesheets {
         static getMargin(): number { return 0; }
         static getSpacing(): number { return 0; }
     }
-
-    export class SpritesheetsMainCharacter {
-      static getName(): string { return 'main-character'; }
-      static getPNG(): string { return require('assets/spritesheets/main-character.png'); }
-      static getFrameWidth(): number { return 64; }
-      static getFrameHeight(): number { return 64; }
-      static getFrameMax(): number { return 5; }
-      static getMargin(): number { return 0; }
-      static getSpacing(): number { return 0; }
-  }
 }
 
 export namespace Atlases {
@@ -284,7 +284,6 @@ export namespace Atlases {
 
         static Frames = AtlasesFloorTilesFrames;
     }
-
     enum AtlasesPreloadSpritesArrayFrames {
         PreloadBar = <any>'preload_bar.png',
         PreloadFrame = <any>'preload_frame.png',

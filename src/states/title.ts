@@ -133,7 +133,7 @@ export default class Title extends Phaser.State {
     this.spaces[this.playerStartY][this.playerStartX].sprite.play('flicker');
 
     this.player = {
-      sprite: this.game.add.sprite((this.playerStartX * 64) + 32, (this.playerStartY * 64) + 32, Assets.Spritesheets.SpritesheetsMainCharacter.getName(), 2),
+      sprite: this.game.add.sprite((this.playerStartX * 64) + 32, (this.playerStartY * 64) + 32, Assets.Spritesheets.SpritesheetsMainCharacter64647.getName(), 2),
       location: [this.playerStartY,this.playerStartX],
       health: 100,
       muck: 0,
