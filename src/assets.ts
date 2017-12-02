@@ -19,6 +19,16 @@ export namespace Spritesheets {
         static getMargin(): number { return 0; }
         static getSpacing(): number { return 0; }
     }
+
+    export class SpritesheetsMainCharacter {
+      static getName(): string { return 'main-character'; }
+      static getPNG(): string { return require('assets/spritesheets/main-character.png'); }
+      static getFrameWidth(): number { return 64; }
+      static getFrameHeight(): number { return 64; }
+      static getFrameMax(): number { return 5; }
+      static getMargin(): number { return 0; }
+      static getSpacing(): number { return 0; }
+  }
 }
 
 export namespace Atlases {
@@ -274,6 +284,7 @@ export namespace Atlases {
 
         static Frames = AtlasesFloorTilesFrames;
     }
+
     enum AtlasesPreloadSpritesArrayFrames {
         PreloadBar = <any>'preload_bar.png',
         PreloadFrame = <any>'preload_frame.png',
@@ -286,32 +297,6 @@ export namespace Atlases {
         static getPNG(): string { return require('assets/atlases/preload_sprites_array.png'); }
 
         static Frames = AtlasesPreloadSpritesArrayFrames;
-    }
-    enum AtlasesPreloadSpritesHashFrames {
-        PreloadBar = <any>'preload_bar.png',
-        PreloadFrame = <any>'preload_frame.png',
-    }
-    export class AtlasesPreloadSpritesHash {
-        static getName(): string { return 'preload_sprites_hash'; }
-
-        static getJSONHash(): string { return require('assets/atlases/preload_sprites_hash.json'); }
-
-        static getPNG(): string { return require('assets/atlases/preload_sprites_hash.png'); }
-
-        static Frames = AtlasesPreloadSpritesHashFrames;
-    }
-    enum AtlasesPreloadSpritesXmlFrames {
-        PreloadBar = <any>'preload_bar.png',
-        PreloadFrame = <any>'preload_frame.png',
-    }
-    export class AtlasesPreloadSpritesXml {
-        static getName(): string { return 'preload_sprites_xml'; }
-
-        static getPNG(): string { return require('assets/atlases/preload_sprites_xml.png'); }
-
-        static getXML(): string { return require('assets/atlases/preload_sprites_xml.xml'); }
-
-        static Frames = AtlasesPreloadSpritesXmlFrames;
     }
 }
 
