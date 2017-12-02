@@ -268,8 +268,6 @@ export namespace Atlases {
     export class AtlasesFloorTiles {
         static getName(): string { return 'floor-tiles'; }
 
-        static getJPG(): string { return require('assets/atlases/floor-tiles.jpg'); }
-
         static getJSONArray(): string { return require('assets/atlases/floor-tiles.json'); }
 
         static getPNG(): string { return require('assets/atlases/floor-tiles.png'); }

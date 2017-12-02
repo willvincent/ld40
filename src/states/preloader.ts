@@ -35,3 +35,22 @@ export default class Preloader extends Phaser.State {
     this.game.state.start('title');
   }
 }
+
+
+// TODO: Need a less fugly bootloader, and include colossal gnome logo screen.
+
+// TODO: Need a proper menu screen
+
+// TODO: Gameplay & Art -- need a player than can be moved, camera to follow player
+// TODO: Gameplay & Art -- need creatures that stalk player
+// TODO: Gameplay -- need to reveal map as user moves around
+// TODO: Gameplay -- would be nice to include the flare idea to temporarily reveal some of the map
+// TODO: Health meter, encountering a creature shouldn't necessarily be _instant_ death
+// TODO: Muck attractant, and half-life logic
+
+
+// TODO: maybe have many levels of the maze? so ladders up & down in various places?
+// TODO: Audio! Don't put off until the very end... 
+// TODO: Logo/Icon for packaging the game
+// TODO: Screenshots & Writeup for publishing.
+
