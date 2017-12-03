@@ -160,7 +160,8 @@ export default {
 
     // TODO: We should play a sound and maybe some sort of text feedback for these..
     if (spaces[y][x].muck) {
-      player.muck += 5;
+      player.muck += 3;
+      if (player.muck > 100) player.muck = 100;
       console.log('Eww, I stepped in something...');
       spaces[y][x].muck--;
       if (spaces[y][x].muck === 0) {
@@ -256,6 +257,6 @@ export default {
         setTimeout(() => game.add.tween(flareLayer[y][x].lit).to({alpha: 0}, 4000, Phaser.Easing.Exponential.In, true), 7500);
       }
     }
-  }
+  },
 
 };

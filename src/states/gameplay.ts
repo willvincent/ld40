@@ -1,17 +1,23 @@
 import * as Assets from '../assets';
+
+import Creature from '../utils/creature';
+import Hud from '../utils/hud';
 import Maze from '../utils/maze';
+
 
 export default class Gameplay extends Phaser.State {
   private player;
   private spaces = [];
+  private creatures = [];
   private playerSpeed = 185;
-  private mazeHeight = 25;
-  private mazeWidth = 45;
+  private mazeHeight = 30;
+  private mazeWidth = 50;
   private maxMuck = 3; // Would change with a difficulty setting...
   private muckPercentage = .3; // Would change with a difficulty setting...
   private playerStartX = Math.floor(Math.random() * ((this.mazeWidth / 2) - 1));
   private playerStartY = Math.floor(Math.random() * ((this.mazeHeight / 2) - 1));
   private flareActive = false;
+  private hudBars = {};
   private groups;
 
   public create(): void {
@@ -23,8 +29,8 @@ export default class Gameplay extends Phaser.State {
       baseLayer: this.game.add.group(),
       muckLayer: this.game.add.group(),
       itemsLayer: this.game.add.group(),
-      creatureLayer: this.game.add.group(),
       playerLayer: this.game.add.group(),
+      creatureLayer: this.game.add.group(),
       hudLayer: this.game.add.group(),
     };
 
@@ -60,15 +66,22 @@ export default class Gameplay extends Phaser.State {
       muck: 0,
     };
 
+    Hud.setupBars(this.player, this.hudBars, this.groups, this.game);
+
     this.player.sprite.anchor.set(0.5, 0.5);
     this.player.sprite.z = 1000;
     this.player.sprite.animations.add('walk', [0, 1, 2, 3, 4, 4, 3, 2, 1, 0], 20, true);
     this.game.camera.follow(this.player.sprite);
 
+    setInterval(() => {
+      if (this.player.muck) {
+        this.player.muck--;
+      }
+    }, 3000);
+
     Maze.visitCell(this.player, this.spaces, this.groups);
 
     // Movement handling
-
     const upKey = this.game.input.keyboard.addKey(Phaser.Keyboard.UP);
     const downKey = this.game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
     const leftKey = this.game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
@@ -91,7 +104,68 @@ export default class Gameplay extends Phaser.State {
     rightKey.onDown.add(() => this.move('right'));
   }
 
+  public update(): void {
+    // interate through all creatures (if any), 
+    // - Check if contacting player, if so, deal damage
+    // - Check player muck level, kill off creatures as necessary
+    if (this.creatures) {
+      // console.log(this.creatures);
+      for (let i = 0; i < this.creatures.length; i++) {
+        if (this.creatures[i]) {
+          let creature = this.creatures[i];
+          // console.log(creature);
+
+          // Creature visibility tweening
+          if (this.spaces[creature.location[0]][creature.location[1]].visible) {
+            this.game.add.tween(creature.sprite).to({ alpha: 1}, 350, Phaser.Easing.Exponential.Out, true);
+          } else {
+            this.game.add.tween(creature.sprite).to({ alpha: 0}, 350, Phaser.Easing.Exponential.Out, true);
+          }
+          if (!creature.moving) {
+
+            let yx = Creature.determineNextCell(creature, this.player.location, this.spaces, this.mazeHeight, this.mazeWidth);
+            Creature.move(creature, yx, this.game);
+            if (creature.location[0] === this.player.location[0] && creature.location[1] === this.player.location[1]) {
+              // Damage the user!
+              this.player.health -= Math.floor(Math.random() * 15) + 2;
+            }
+          }
+        }
+      }
+    }
+
+    Hud.updateBars(this.player, this.hudBars);
+
+    if (this.player.health === 0) {
+      // End game, loser.
+    }
+
+    if (this.creatures.length !== this.player.muck) {
+      if (this.creatures.length > this.player.muck) {
+        let num = (this.creatures.length - this.player.muck);
+        for (let i = 0; i < num; i++) {
+          this.game.add.tween(this.creatures[i].sprite).to({ alpha: 0 }, 250, Phaser.Easing.Linear.None, true);
+          setTimeout(() => {
+            this.creatures[i].sprite.kill();
+          }, 300);
+        }
+        this.creatures.splice(0, num);
+      } else {
+        let num = (this.player.muck - this.creatures.length);
+        for (let i = 0; i < num; i++) {
+          Creature.spawn(this.mazeWidth, this.mazeHeight, this.groups, this.creatures);
+        }
+      }
+    }
+
+    this.game.debug.text(`There are ${this.creatures.length} creatures in the maze...`, 500, 32);
+
+  }
+
   private move(direction): void {
+    if (this.player.location[0] === (this.mazeHeight - 1) && this.player.location[1] === (this.mazeWidth - 1)) {
+      // Win!
+    }
     switch (direction) {
       case 'up':
         this.game.add.tween(this.player.sprite).to({ angle: -90 }, 20, Phaser.Easing.Linear.None, true);
