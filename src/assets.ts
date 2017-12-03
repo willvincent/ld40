@@ -21,6 +21,11 @@ export namespace Images {
 
         static getPNG(): string { return require('assets/images/heart.png'); }
     }
+    export class ImagesSmelly {
+        static getName(): string { return 'smelly'; }
+
+        static getPNG(): string { return require('assets/images/smelly.png'); }
+    }
 }
 
 export namespace Spritesheets {

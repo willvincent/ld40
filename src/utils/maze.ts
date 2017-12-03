@@ -160,7 +160,7 @@ export default {
 
     // TODO: We should play a sound and maybe some sort of text feedback for these..
     if (spaces[y][x].muck) {
-      player.muck++;
+      player.muck += 5;
       console.log('Eww, I stepped in something...');
       spaces[y][x].muck--;
       if (spaces[y][x].muck === 0) {
