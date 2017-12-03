@@ -159,6 +159,7 @@ export default class Gameplay extends Phaser.State {
     }
 
     this.game.debug.text(`There are ${this.creatures.length} creatures in the maze...`, 500, 32);
+    this.game.debug.text(`Player health: ${this.player.health}, flares: ${this.player.flares}, muck: ${this.player.muck}`, 500, 64);
 
   }
 
