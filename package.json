@@ -28,7 +28,7 @@
   "bugs": {
     "url": "https://github.com/willvincent/ld40/issues"
   },
-  "homepage": "https://colossalgnome.com",
+  "homepage": "http://colossalgnome.com",
   "devDependencies": {
     "@types/node": "8.0.47",
     "@types/webfontloader": "1.6.29",

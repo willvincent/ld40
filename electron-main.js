@@ -14,13 +14,15 @@ function createWindow() {
   const sizes = electron.screen.getPrimaryDisplay().workAreaSize;
   let menu = [{
     label: 'Main',
-    submenu: [{
-        label: 'About',
-        accelerator: 'Command+A',
-        click: () => openAboutWindow({
-          icon_path: path.join(__dirname, 'assets/icons/png/64x64.png'),
-        })
-      },
+    submenu: [
+      // About window doesn't work with webpack config. :\
+      // {
+      //   label: 'About',
+      //   accelerator: 'Command+A',
+      //   click: () => openAboutWindow({
+      //     icon_path: path.join(__dirname, 'assets/icons/png/64x64.png'),
+      //   })
+      // },
       {
         label: 'Quit',
         accelerator: 'Command+Q',
