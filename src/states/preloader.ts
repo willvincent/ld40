@@ -32,7 +32,7 @@ export default class Preloader extends Phaser.State {
   }
 
   private loadTitle(): void {
-    this.game.state.start('title');
+    this.game.state.start('gameplay');
   }
 }
 
@@ -50,7 +50,7 @@ export default class Preloader extends Phaser.State {
 
 
 // TODO: maybe have many levels of the maze? so ladders up & down in various places?
-// TODO: Audio! Don't put off until the very end... 
+// TODO: Audio! Don't put off until the very end...
 // TODO: Logo/Icon for packaging the game
 // TODO: Screenshots & Writeup for publishing.
 
