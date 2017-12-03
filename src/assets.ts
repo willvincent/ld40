@@ -9,6 +9,16 @@ export namespace Images {
 }
 
 export namespace Spritesheets {
+    export class SpritesheetsCreature64647 {
+        static getName(): string { return 'creature.[64,64,7,0,0]'; }
+
+        static getPNG(): string { return require('assets/spritesheets/creature.[64,64,7,0,0].png'); }
+        static getFrameWidth(): number { return 64; }
+        static getFrameHeight(): number { return 64; }
+        static getFrameMax(): number { return 7; }
+        static getMargin(): number { return 0; }
+        static getSpacing(): number { return 0; }
+    }
     export class SpritesheetsMainCharacter64647 {
         static getName(): string { return 'main-character.[64,64,7,0,0]'; }
 
@@ -19,13 +29,13 @@ export namespace Spritesheets {
         static getMargin(): number { return 0; }
         static getSpacing(): number { return 0; }
     }
-    export class SpritesheetsMetalslugMummy374518 {
-        static getName(): string { return 'metalslug_mummy.[37,45,18,0,0]'; }
+    export class SpritesheetsMuck64643 {
+        static getName(): string { return 'muck.[64,64,3,0,0]'; }
 
-        static getPNG(): string { return require('assets/spritesheets/metalslug_mummy.[37,45,18,0,0].png'); }
-        static getFrameWidth(): number { return 37; }
-        static getFrameHeight(): number { return 45; }
-        static getFrameMax(): number { return 18; }
+        static getPNG(): string { return require('assets/spritesheets/muck.[64,64,3,0,0].png'); }
+        static getFrameWidth(): number { return 64; }
+        static getFrameHeight(): number { return 64; }
+        static getFrameMax(): number { return 3; }
         static getMargin(): number { return 0; }
         static getSpacing(): number { return 0; }
     }

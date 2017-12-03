@@ -147,9 +147,14 @@ export default class Title extends Phaser.State {
         if (!this.spaces[y][x].visible) {
           this.spaces[y][x].sprite.frameName = 'unvisited';
         }
+
         this.spaces[y][x].sprite.z = 0;
-        // TODO: Maybe instead of a looping animatino frames should just randomly change between the three every few ms, with random intervals/timeouts? looping doesn't look like the flicker of a torch...
         this.spaces[y][x].sprite.animations.add('flicker', Phaser.Animation.generateFrameNames(`f${this.spaces[y][x].doors.join('')}0${this.spaces[y][x].version}`, 1, 3, '', 2), 1.9, true, false);
+        if (this.spaces[y][x].muck) {
+          let muck = this.game.add.sprite((x * 64) + 32, (y * 64) + 32, Assets.Spritesheets.SpritesheetsMuck64643.getName(), this.spaces[y][x].muck - 1);
+          muck.anchor.setTo(0.5, 0.5)
+          muck.angle = Math.floor(Math.random() * 360);
+        }
       }
     }
 
@@ -187,9 +192,9 @@ export default class Title extends Phaser.State {
             Phaser.Easing.Linear.None,
             true);
             setTimeout(() => { 
-              this.player.sprite.animations.stop(0, true);
+              this.player.sprite.animations.stop(this.player.sprite.animations.currentCell, false);
               this.updateVisibles();
-            }, this.playerSpeed);
+            }, this.playerSpeed + Math.floor(Math.random() * 100));
           }
           break;
         case 'ArrowRight':
@@ -206,9 +211,9 @@ export default class Title extends Phaser.State {
             Phaser.Easing.Linear.None,
             true);
             setTimeout(() => { 
-              this.player.sprite.animations.stop(0, true);
+              this.player.sprite.animations.stop(this.player.sprite.animations.currentCell, false);
               this.updateVisibles();
-            }, this.playerSpeed);
+            }, this.playerSpeed + Math.floor(Math.random() * 100));
           }
           break;
         case 'ArrowDown':
@@ -225,9 +230,9 @@ export default class Title extends Phaser.State {
             Phaser.Easing.Linear.None,
             true);
             setTimeout(() => { 
-              this.player.sprite.animations.stop(0, true);
+              this.player.sprite.animations.stop(this.player.sprite.animations.currentCell, false);
               this.updateVisibles();
-            }, this.playerSpeed);
+            }, this.playerSpeed + Math.floor(Math.random() * 100));
           }
           break;
         case 'ArrowLeft':
@@ -244,9 +249,9 @@ export default class Title extends Phaser.State {
             Phaser.Easing.Linear.None,
             true);
             setTimeout(() => { 
-              this.player.sprite.animations.stop(0, true);
+              this.player.sprite.animations.stop(this.player.sprite.animations.currentCell, false);
               this.updateVisibles();
-            }, this.playerSpeed);
+            }, this.playerSpeed + Math.floor(Math.random() * 100));
             
           }
           break;
@@ -256,6 +261,7 @@ export default class Title extends Phaser.State {
 
   private updateVisibles(): void {
     const xy = this.player.location;
+    console.log(this.spaces[xy[0]][xy[1]]);
     this.spaces[xy[0]][xy[1]].sprite.play('flicker');
     this.spaces[xy[0]][xy[1]].visited = true;
     for (let i = 0; i < 4; i++) {
