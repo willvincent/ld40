@@ -10,6 +10,8 @@ export default class Title extends Phaser.State {
   private parsedCount = 0;
   private mazeHeight = 15;
   private mazeWidth = 25;
+  private maxMuck = 3; // Would change with a difficulty setting...
+  private muckPercentage = .3; // Would change with a difficulty setting... 
   private totalMuck = 0;
   private playerStartX = Math.floor(Math.random() * ((this.mazeWidth / 2) - 1));
   private playerStartY = Math.floor(Math.random() * ((this.mazeHeight / 2) - 1));
@@ -20,19 +22,39 @@ export default class Title extends Phaser.State {
     const downKey = this.game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
     const leftKey = this.game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
     const rightKey = this.game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
+    const spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     
     upKey.onDown.add(this.move, this);
     downKey.onDown.add(this.move, this);
     leftKey.onDown.add(this.move, this);
     rightKey.onDown.add(this.move, this);
+    spaceKey.onDown.add(() => {
+      let peak = [];
+      for (let y = 0; y < this.mazeHeight; y++) {
+        for (let x = 0; x < this.mazeWidth; x++) {
+          if (!this.spaces[y][x].visited) {
+            peak.push(this.game.add.sprite(x * 64, y * 64, Assets.Atlases.AtlasesFloorTiles.getName(), `f${this.spaces[y][x].doors.join('')}0${this.spaces[y][x].version}00`));
+          }
+        }
+      }
+      peak.forEach(sprite => this.game.add.tween(sprite).to({alpha: 0}, 10000, Phaser.Easing.Linear.None, true));
+
+      setTimeout(() => {
+        peak.forEach(sprite => sprite.kill());
+        peak = [];
+      }, 10250);
+    }, this);
 
     for (let y = 0; y < this.mazeHeight; y++) {
       for (let x = 0; x < this.mazeWidth; x++) {
-        let muck = false;
-        if (Math.random() > .7) {
-          if (this.totalMuck < Math.floor(.3 * (this.mazeHeight * this.mazeWidth))) {
-            this.totalMuck++;
-            muck = true;
+        let muck = 0;
+        // Give the player a _tiny_ break and omit muck from their starting position.
+        if (x !== this.playerStartX && y !== this.playerStartY) {
+          if (Math.random() > .7) {
+            if (this.totalMuck < Math.floor(this.muckPercentage * (this.mazeHeight * this.mazeWidth))) {
+              this.totalMuck++;
+              muck = Math.floor(Math.random() * (this.maxMuck - 1)) + 1;
+            }
           }
         }
         if (!this.spaces[y]) {
@@ -125,6 +147,7 @@ export default class Title extends Phaser.State {
         if (!this.spaces[y][x].visible) {
           this.spaces[y][x].sprite.frameName = 'unvisited';
         }
+        this.spaces[y][x].sprite.z = 0;
         // TODO: Maybe instead of a looping animatino frames should just randomly change between the three every few ms, with random intervals/timeouts? looping doesn't look like the flicker of a torch...
         this.spaces[y][x].sprite.animations.add('flicker', Phaser.Animation.generateFrameNames(`f${this.spaces[y][x].doors.join('')}0${this.spaces[y][x].version}`, 1, 3, '', 2), 1.9, true, false);
       }
@@ -140,8 +163,8 @@ export default class Title extends Phaser.State {
     };
 
     this.player.sprite.anchor.set(0.5, 0.5);
+    this.player.sprite.z = 1000;
     this.player.sprite.animations.add('walk', [0, 1, 2, 3, 4, 4, 3, 2, 1, 0], 20, true);
-    // this.game.camera.flash(0x000000, 1000);
     this.game.camera.follow(this.player.sprite);
   }
 
