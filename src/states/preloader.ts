@@ -4,17 +4,20 @@ import * as AssetUtils from '../utils/assetUtils';
 export default class Preloader extends Phaser.State {
   private preloadBarSprite: Phaser.Sprite = null;
   private preloadFrameSprite: Phaser.Sprite = null;
+  private googleFontText: Phaser.Text = null;
 
   public preload(): void {
+    this.googleFontText = this.game.add.text(this.game.width / 2, (this.game.height / 2) - 80, 'Loading...', {
+      font: '35px ' + Assets.GoogleWebFonts.PressStart2P,
+      fill: '#EEEEEE',
+      align: 'center',
+    });
+    this.googleFontText.anchor.setTo(0.5, 0.5);
     this.preloadBarSprite = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, Assets.Atlases.AtlasesPreloadSpritesArray.getName(), Assets.Atlases.AtlasesPreloadSpritesArray.Frames.PreloadBar);
-    // this.preloadBarSprite = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, Assets.Atlases.AtlasesPreloadSpritesHash.getName(), Assets.Atlases.AtlasesPreloadSpritesHash.Frames.PreloadBar);
-    // this.preloadBarSprite = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, Assets.Atlases.AtlasesPreloadSpritesXml.getName(), Assets.Atlases.AtlasesPreloadSpritesXml.Frames.PreloadBar);
     this.preloadBarSprite.anchor.setTo(0, 0.5);
     this.preloadBarSprite.x -= this.preloadBarSprite.width * 0.5;
 
     this.preloadFrameSprite = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, Assets.Atlases.AtlasesPreloadSpritesArray.getName(), Assets.Atlases.AtlasesPreloadSpritesArray.Frames.PreloadFrame);
-    // this.preloadFrameSprite = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, Assets.Atlases.AtlasesPreloadSpritesHash.getName(), Assets.Atlases.AtlasesPreloadSpritesHash.Frames.PreloadFrame);
-    // this.preloadFrameSprite = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, Assets.Atlases.AtlasesPreloadSpritesXml.getName(), Assets.Atlases.AtlasesPreloadSpritesXml.Frames.PreloadFrame);
     this.preloadFrameSprite.anchor.setTo(0.5);
 
     this.game.load.setPreloadSprite(this.preloadBarSprite);
@@ -32,7 +35,7 @@ export default class Preloader extends Phaser.State {
   }
 
   private loadTitle(): void {
-    this.game.state.start('gameplay');
+    this.game.state.start('title');
   }
 }
 

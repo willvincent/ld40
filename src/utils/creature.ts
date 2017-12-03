@@ -29,10 +29,10 @@ export default {
     let options = [];
     if (spaces[y][x].doors[0]) {
       options.push([y - 1, x]);
-    } 
+    }
     if (spaces[y][x].doors[1]) {
       options.push([y, x + 1]);
-    } 
+    }
     if (spaces[y][x].doors[2]) {
       options.push([y + 1, x]);
     }

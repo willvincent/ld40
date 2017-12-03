@@ -142,11 +142,12 @@ export default {
     }
     spaces[y][x].sprite.play('flicker');
 
-    // TODO: We should play a sound and maybe some sort of text feedback for these.. 
+    // TODO: We should play a sound and maybe some sort of text feedback for these..
     if (spaces[y][x].item) {
       if (spaces[y][x].item === 'flare') {
         console.log('Sweet! A flare!');
         player.flares++;
+        if (player.flares > 5) player.flares = 5;
       } else {
         console.log('Ahh, health. Nice.');
         player.health += 25;
@@ -154,7 +155,7 @@ export default {
           player.health = 100;
         }
       }
-      delete(spaces[y][x].item);
+      delete (spaces[y][x].item);
       spaces[y][x].itemSprite.kill();
     }
 
@@ -205,17 +206,17 @@ export default {
           }
         } else if (i === 2) {
           spaces[y + 1][x].visible = true;
-        if (!spaces[y + 1][x].sprite) {
-          spaces[y + 1][x].sprite = groups.baseLayer.create(x * 64, (y + 1) * 64, Assets.Atlases.AtlasesFloorTiles.getName(), `f${spaces[y + 1][x].doors.join('')}0${spaces[y + 1][x].version}00`);
-          spaces[y + 1][x].sprite.animations.add('flicker', Phaser.Animation.generateFrameNames(`f${spaces[y + 1][x].doors.join('')}0${spaces[y + 1][x].version}`, 1, 3, '', 2), 1.9, true, false);
-        }
-        if (spaces[y + 1][x].muck) {
-          spaces[y + 1][x].muckSprite.alpha = .4;
-          spaces[y + 1][x].muckSprite.frame = spaces[y + 1][x].muck - 1;
-        }
-        if (spaces[y + 1][x].item) {
-          spaces[y + 1][x].itemSprite.alpha = 1;
-        }
+          if (!spaces[y + 1][x].sprite) {
+            spaces[y + 1][x].sprite = groups.baseLayer.create(x * 64, (y + 1) * 64, Assets.Atlases.AtlasesFloorTiles.getName(), `f${spaces[y + 1][x].doors.join('')}0${spaces[y + 1][x].version}00`);
+            spaces[y + 1][x].sprite.animations.add('flicker', Phaser.Animation.generateFrameNames(`f${spaces[y + 1][x].doors.join('')}0${spaces[y + 1][x].version}`, 1, 3, '', 2), 1.9, true, false);
+          }
+          if (spaces[y + 1][x].muck) {
+            spaces[y + 1][x].muckSprite.alpha = .4;
+            spaces[y + 1][x].muckSprite.frame = spaces[y + 1][x].muck - 1;
+          }
+          if (spaces[y + 1][x].item) {
+            spaces[y + 1][x].itemSprite.alpha = 1;
+          }
         } else if (i === 3) {
           spaces[y][x - 1].visible = true;
           if (!spaces[y][x - 1].sprite) {
@@ -253,8 +254,8 @@ export default {
   throwFlare(game) {
     for (let y = 0; y < flareLayer.length; y++) {
       for (let x = 0; x < flareLayer[y].length; x++) {
-        game.add.tween(flareLayer[y][x].lit).to({alpha: .9}, 4000, Phaser.Easing.Exponential.Out, true);
-        setTimeout(() => game.add.tween(flareLayer[y][x].lit).to({alpha: 0}, 4000, Phaser.Easing.Exponential.In, true), 7500);
+        game.add.tween(flareLayer[y][x].lit).to({ alpha: .9 }, 4000, Phaser.Easing.Exponential.Out, true);
+        setTimeout(() => game.add.tween(flareLayer[y][x].lit).to({ alpha: 0 }, 4000, Phaser.Easing.Exponential.In, true), 7500);
       }
     }
   },

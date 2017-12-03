@@ -51,6 +51,11 @@ export namespace Images {
 
         static getPNG(): string { return require('assets/images/background_template.png'); }
     }
+    export class ImagesColossalgnomeLogo {
+        static getName(): string { return 'colossalgnome.logo'; }
+
+        static getPNG(): string { return require('assets/images/colossalgnome.logo.png'); }
+    }
     export class ImagesFlare {
         static getName(): string { return 'flare'; }
 
@@ -74,6 +79,16 @@ export namespace Images {
 }
 
 export namespace Spritesheets {
+    export class SpritesheetsBlood646410 {
+        static getName(): string { return 'blood.[64,64,10,0,0]'; }
+
+        static getPNG(): string { return require('assets/spritesheets/blood.[64,64,10,0,0].png'); }
+        static getFrameWidth(): number { return 64; }
+        static getFrameHeight(): number { return 64; }
+        static getFrameMax(): number { return 10; }
+        static getMargin(): number { return 0; }
+        static getSpacing(): number { return 0; }
+    }
     export class SpritesheetsCreature64647 {
         static getName(): string { return 'creature.[64,64,7,0,0]'; }
 
@@ -81,6 +96,16 @@ export namespace Spritesheets {
         static getFrameWidth(): number { return 64; }
         static getFrameHeight(): number { return 64; }
         static getFrameMax(): number { return 7; }
+        static getMargin(): number { return 0; }
+        static getSpacing(): number { return 0; }
+    }
+    export class SpritesheetsFlareBar128646 {
+        static getName(): string { return 'flare-bar.[128,64,6,0,0]'; }
+
+        static getPNG(): string { return require('assets/spritesheets/flare-bar.[128,64,6,0,0].png'); }
+        static getFrameWidth(): number { return 128; }
+        static getFrameHeight(): number { return 64; }
+        static getFrameMax(): number { return 6; }
         static getMargin(): number { return 0; }
         static getSpacing(): number { return 0; }
     }
@@ -411,7 +436,7 @@ export namespace Audiosprites {
 }
 
 export namespace GoogleWebFonts {
-    export const Barrio: string = 'Barrio';
+    export const PressStart2P: string = 'Press Start 2P';
 }
 
 export namespace CustomWebFonts {
