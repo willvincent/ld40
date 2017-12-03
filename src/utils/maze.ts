@@ -86,7 +86,6 @@ export default {
             if (totalMuck < Math.floor(muckPercentage * (height * width))) {
               totalMuck++;
               spaces[y][x].muck = Math.floor(Math.random() * maxMuck) + 1;
-              console.log(spaces[y][x].muck);
               spaces[y][x].muckSprite = groups.muckLayer.create((x * 64) + 32, (y * 64) + 32, Assets.Spritesheets.SpritesheetsMuck64643.getName(), spaces[y][x].muck - 1);
               spaces[y][x].muckSprite.scale.setTo(.85, .85);
               spaces[y][x].muckSprite.anchor.setTo(0.5, 0.5);
