@@ -46,11 +46,6 @@ export namespace Images {
 
         static getPNG(): string { return require('assets/icons/png/64x64.png'); }
     }
-    export class ImagesBackgroundTemplate {
-        static getName(): string { return 'background_template'; }
-
-        static getPNG(): string { return require('assets/images/background_template.png'); }
-    }
     export class ImagesColossalgnomeLogo {
         static getName(): string { return 'colossalgnome.logo'; }
 
@@ -481,23 +476,10 @@ export namespace Text {
 }
 
 export namespace Scripts {
-    export class ScriptsBlurX {
-        static getName(): string { return 'BlurX'; }
-
-        static getJS(): string { return require('assets/scripts/BlurX.js'); }
-    }
-    export class ScriptsBlurY {
-        static getName(): string { return 'BlurY'; }
-
-        static getJS(): string { return require('assets/scripts/BlurY.js'); }
-    }
+    class IExistSoTypeScriptWillNotComplainAboutAnEmptyNamespace {}
 }
 export namespace Shaders {
-    export class ShadersPixelate {
-        static getName(): string { return 'pixelate'; }
-
-        static getFRAG(): string { return require('assets/shaders/pixelate.frag'); }
-    }
+    class IExistSoTypeScriptWillNotComplainAboutAnEmptyNamespace {}
 }
 export namespace Misc {
     export class IconsMacIcon {

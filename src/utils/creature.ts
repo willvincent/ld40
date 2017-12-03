@@ -18,7 +18,8 @@ export default {
     creature.sprite.play('walk');
     creature.sprite.alpha = 0;
 
-    creatures.push(creature);
+    // Put new creatures at the beginning of array, since we cull them from the end of the array...
+    creatures.unshift(creature);
   },
 
   // Simple, dumb stalking because pathfinding is proving to be too resource heavy AND not working right.

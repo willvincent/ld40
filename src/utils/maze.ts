@@ -156,7 +156,7 @@ export default {
         }
       }
       delete (spaces[y][x].item);
-      spaces[y][x].itemSprite.kill();
+      spaces[y][x].itemSprite.destroy();
     }
 
     // TODO: We should play a sound and maybe some sort of text feedback for these..
@@ -166,7 +166,7 @@ export default {
       console.log('Eww, I stepped in something...');
       spaces[y][x].muck--;
       if (spaces[y][x].muck === 0) {
-        spaces[y][x].muckSprite.kill();
+        spaces[y][x].muckSprite.destroy();
       } else {
         spaces[y][x].muckSprite.frame = spaces[y][x].muck - 1;
         spaces[y][x].muckSprite.scale.setTo(.85, .85);

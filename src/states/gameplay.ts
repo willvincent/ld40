@@ -80,7 +80,7 @@ export default class Gameplay extends Phaser.State {
     this.googleFontText.fixedToCamera = true;
     this.game.add.tween(this.googleFontText).to({ alpha: 1 }, 1000, Phaser.Easing.Exponential.In, true);
     setTimeout(() => this.game.add.tween(this.googleFontText).to({ alpha: 0 }, 1000, Phaser.Easing.Exponential.Out, true), 1750);
-    setTimeout(() => this.googleFontText.kill(), 3000);
+    setTimeout(() => this.googleFontText.destroy(), 3000);
 
 
     this.player.sprite.anchor.set(0.5, 0.5);
@@ -91,9 +91,6 @@ export default class Gameplay extends Phaser.State {
     setInterval(() => {
       if (this.player.muck) {
         this.player.muck--;
-      }
-      if (this.player.health < 100) {
-        this.player.health++;
       }
     }, 3000);
 
@@ -167,7 +164,7 @@ export default class Gameplay extends Phaser.State {
               blood.angle = Math.random() * 360;
               blood.play('spurt');
               setTimeout(() => {
-                blood.kill();
+                blood.destroy();
               }, 125);
             }
           }
@@ -177,7 +174,7 @@ export default class Gameplay extends Phaser.State {
 
     Hud.updateBars(this.player, this.hudBars);
 
-    if (this.player.health === 0) {
+    if (this.player.health <= 0) {
       this.game.state.start('dead');
     }
 
@@ -194,15 +191,13 @@ export default class Gameplay extends Phaser.State {
     if (this.creatures.length !== this.player.muck) {
       if (this.creatures.length > this.player.muck) {
         let num = (this.creatures.length - this.player.muck);
-        for (let i = 0; i < num; i++) {
-          this.game.add.tween(this.creatures[i].sprite).to({ alpha: 0 }, 250, Phaser.Easing.Linear.None, true);
-          setTimeout(() => {
-            if (this.creatures[i].sprite) {
-              this.creatures[i].sprite.kill();
-            }
-          }, 300);
+        for (let i = this.creatures.length; i > this.player.muck; i--) {
+          if (this.creatures[i]) {
+            this.creatures[i].sprite.destroy();
+            this.creatures.splice(i, 1);
+          }
         }
-        setTimeout(() => this.creatures.splice(0, num), 500);
+        // setTimeout(() => this.creatures.splice(0, num), 500);
       } else {
         let num = (this.player.muck - this.creatures.length);
         for (let i = 0; i < num; i++) {

@@ -29,8 +29,8 @@ export default class Winner extends Phaser.State {
       this.game.add.tween(this.googleFontText2).to({ alpha: 0 }, 1500, Phaser.Easing.Exponential.Out, true);
     }, 6500);
     setTimeout(() => {
-      this.googleFontText.kill();
-      this.googleFontText2.kill();
+      this.googleFontText.destroy();
+      this.googleFontText2.destroy();
       // Should be 'menu'..
       this.game.state.start('gameplay');
     }, 10000);

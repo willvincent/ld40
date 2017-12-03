@@ -16,7 +16,7 @@ export default class Dead extends Phaser.State {
     this.game.add.tween(this.googleFontText).to({ alpha: 1 }, 1500, Phaser.Easing.Exponential.In, true);
     setTimeout(() => this.game.add.tween(this.googleFontText).to({ alpha: 0 }, 1500, Phaser.Easing.Exponential.Out, true), 6500);
     setTimeout(() => {
-      this.googleFontText.kill();
+      this.googleFontText.destroy();
       // Should be 'menu'..
       this.game.state.start('gameplay');
     }, 10000);

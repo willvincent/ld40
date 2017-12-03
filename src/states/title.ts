@@ -37,9 +37,9 @@ export default class Title extends Phaser.State {
     setTimeout(() => this.game.add.tween(this.googleFontText2).to({ alpha: 0 }, 1500, Phaser.Easing.Linear.None, true), 13000);
 
     setTimeout(() => {
-      logo.kill();
-      this.googleFontText.kill();
-      this.googleFontText2.kill();
+      logo.destroy();
+      this.googleFontText.destroy();
+      this.googleFontText2.destroy();
       // Should be 'menu'..
       this.game.state.start('gameplay');
     }, 15000);
