@@ -1,6 +1,51 @@
 /* AUTO GENERATED FILE. DO NOT MODIFY. YOU WILL LOSE YOUR CHANGES ON BUILD. */
 
 export namespace Images {
+    export class IconsPng1024x1024 {
+        static getName(): string { return '1024x1024'; }
+
+        static getPNG(): string { return require('assets/icons/png/1024x1024.png'); }
+    }
+    export class IconsPng128x128 {
+        static getName(): string { return '128x128'; }
+
+        static getPNG(): string { return require('assets/icons/png/128x128.png'); }
+    }
+    export class IconsPng16x16 {
+        static getName(): string { return '16x16'; }
+
+        static getPNG(): string { return require('assets/icons/png/16x16.png'); }
+    }
+    export class IconsPng24x24 {
+        static getName(): string { return '24x24'; }
+
+        static getPNG(): string { return require('assets/icons/png/24x24.png'); }
+    }
+    export class IconsPng256x256 {
+        static getName(): string { return '256x256'; }
+
+        static getPNG(): string { return require('assets/icons/png/256x256.png'); }
+    }
+    export class IconsPng32x32 {
+        static getName(): string { return '32x32'; }
+
+        static getPNG(): string { return require('assets/icons/png/32x32.png'); }
+    }
+    export class IconsPng48x48 {
+        static getName(): string { return '48x48'; }
+
+        static getPNG(): string { return require('assets/icons/png/48x48.png'); }
+    }
+    export class IconsPng512x512 {
+        static getName(): string { return '512x512'; }
+
+        static getPNG(): string { return require('assets/icons/png/512x512.png'); }
+    }
+    export class IconsPng64x64 {
+        static getName(): string { return '64x64'; }
+
+        static getPNG(): string { return require('assets/icons/png/64x64.png'); }
+    }
     export class ImagesBackgroundTemplate {
         static getName(): string { return 'background_template'; }
 
@@ -430,5 +475,14 @@ export namespace Shaders {
     }
 }
 export namespace Misc {
-    class IExistSoTypeScriptWillNotComplainAboutAnEmptyNamespace {}
+    export class IconsMacIcon {
+        static getName(): string { return 'icon'; }
+
+        static getFile(): string { return require('assets/icons/mac/icon.icns'); }
+    }
+    export class IconsWinIcon {
+        static getName(): string { return 'icon'; }
+
+        static getFile(): string { return require('assets/icons/win/icon.ico'); }
+    }
 }

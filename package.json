@@ -1,7 +1,8 @@
 {
   "name": "ld40",
   "productName": "My LD40 Game",
-  "version": "0.0.1",
+  "description": "Ludum Dare 40: The More You Have, The Worse It Is",
+  "version": "v0.1.0",
   "license": "CC-BY-NC-SA-4.0",
   "main": "electron-main.js",
   "scripts": {

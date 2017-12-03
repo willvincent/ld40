@@ -1,4 +1,5 @@
 const electron = require('electron');
+const path = require('path');
 const openAboutWindow = require('about-window').default;
 // Module to control application life.
 const app = electron.app;
@@ -17,7 +18,7 @@ function createWindow() {
         label: 'About',
         accelerator: 'Command+A',
         click: () => openAboutWindow({
-          icon_path: `${__dirname}/icon.png`,
+          icon_path: path.join(__dirname, 'assets/icons/png/64x64.png'),
         })
       },
       {
@@ -34,7 +35,7 @@ function createWindow() {
     width: Math.floor(sizes.width / 1.5),
     frame: false,
     resizable: false,
-    icon: `${__dirname}/icon.png`,
+    icon: path.join(__dirname, 'assets/icons/png/64x64.png'),
   });
 
   if (process.env.NODE_ENV === 'development') {
