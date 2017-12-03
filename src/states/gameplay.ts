@@ -43,6 +43,15 @@ export default class Gameplay extends Phaser.State {
       this.groups
     );
 
+    Maze.populateGoodies(
+      this.spaces,
+      this.playerStartX,
+      this.playerStartY,
+      this.mazeHeight,
+      this.mazeWidth,
+      this.groups
+    );
+
     this.player = {
       sprite: this.groups.playerLayer.create((this.playerStartX * 64) + 32, (this.playerStartY * 64) + 32, Assets.Spritesheets.SpritesheetsMainCharacter64647.getName(), 2),
       location: [this.playerStartY, this.playerStartX],
@@ -58,8 +67,6 @@ export default class Gameplay extends Phaser.State {
 
     Maze.visitCell(this.player, this.spaces, this.groups);
 
-    // Maze.throwFlare(this.game);
-
     // Movement handling
 
     const upKey = this.game.input.keyboard.addKey(Phaser.Keyboard.UP);
@@ -69,8 +76,8 @@ export default class Gameplay extends Phaser.State {
     const spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
     spaceKey.onDown.add(() => {
-      console.log('Throwing Flare!');
       if (this.player.flares && !this.flareActive) {
+        console.log('Throwing a Flare!');
         this.player.flares--;
         this.flareActive = true;
         Maze.throwFlare(this.game);

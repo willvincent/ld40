@@ -6,6 +6,16 @@ export namespace Images {
 
         static getPNG(): string { return require('assets/images/background_template.png'); }
     }
+    export class ImagesFlare {
+        static getName(): string { return 'flare'; }
+
+        static getPNG(): string { return require('assets/images/flare.png'); }
+    }
+    export class ImagesHealth {
+        static getName(): string { return 'health'; }
+
+        static getPNG(): string { return require('assets/images/health.png'); }
+    }
     export class ImagesHeart {
         static getName(): string { return 'heart'; }
 

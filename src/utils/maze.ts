@@ -98,6 +98,39 @@ export default {
     }
   },
 
+  populateGoodies(spaces, playerStartX, playerStartY, mazeHeight, mazeWidth, groups) {
+    let numItems = Math.floor(Math.random() * (mazeHeight * mazeWidth * .15));
+
+    console.log(`Populating ${numItems} goodies!`);
+
+    while (numItems > 0) {
+      // Pick a random cell
+      const x = Math.floor(Math.random() * mazeWidth);
+      const y = Math.floor(Math.random() * mazeHeight);
+
+      if (x !== playerStartX && y !== playerStartY) {
+        if (!spaces[y][x].item) {
+          if (Math.random() > .5) {
+            spaces[y][x].item = 'health';
+            // Add health item sprite
+            spaces[y][x].itemSprite = groups.itemsLayer.create((64 * x) + 32, (64 * y) + 32, Assets.Images.ImagesHealth.getName());
+            spaces[y][x].itemSprite.anchor.setTo(.5, .5);
+            spaces[y][x].itemSprite.scale.setTo(.7, .7);
+            spaces[y][x].itemSprite.alpha = 0;
+          } else {
+            spaces[y][x].item = 'flare';
+            // Add flare item sprite
+            spaces[y][x].itemSprite = groups.itemsLayer.create((64 * x) + 32, (64 * y) + 32, Assets.Images.ImagesFlare.getName());
+            spaces[y][x].itemSprite.anchor.setTo(.5, .5);
+            spaces[y][x].itemSprite.scale.setTo(.7, .7);
+            spaces[y][x].itemSprite.alpha = 0;
+          }
+          numItems--;
+        }
+      }
+    }
+  },
+
   visitCell(player, spaces, groups) {
     const y = player.location[0];
     const x = player.location[1];
@@ -109,12 +142,27 @@ export default {
     }
     spaces[y][x].sprite.play('flicker');
 
+    // TODO: We should play a sound and maybe some sort of text feedback for these.. 
+    if (spaces[y][x].item) {
+      if (spaces[y][x].item === 'flare') {
+        console.log('Sweet! A flare!');
+        player.flares++;
+      } else {
+        console.log('Ahh, health. Nice.');
+        player.health += 25;
+        if (player.health > 100) {
+          player.health = 100;
+        }
+      }
+      delete(spaces[y][x].item);
+      spaces[y][x].itemSprite.kill();
+    }
+
+    // TODO: We should play a sound and maybe some sort of text feedback for these..
     if (spaces[y][x].muck) {
-      console.log('muck: ', spaces[y][x].muck);
       player.muck++;
       console.log('Eww, I stepped in something...');
       spaces[y][x].muck--;
-      console.log('muck: ', spaces[y][x].muck);
       if (spaces[y][x].muck === 0) {
         spaces[y][x].muckSprite.kill();
       } else {
@@ -138,6 +186,9 @@ export default {
             spaces[y - 1][x].muckSprite.alpha = .4;
             spaces[y - 1][x].muckSprite.frame = spaces[y - 1][x].muck - 1;
           }
+          if (spaces[y - 1][x].item) {
+            spaces[y - 1][x].itemSprite.alpha = 1;
+          }
         } else if (i === 1) {
           spaces[y][x + 1].visible = true;
           if (!spaces[y][x + 1].sprite) {
@@ -147,6 +198,9 @@ export default {
           if (spaces[y][x + 1].muck) {
             spaces[y][x + 1].muckSprite.alpha = .4;
             spaces[y][x + 1].muckSprite.frame = spaces[y][x + 1].muck - 1;
+          }
+          if (spaces[y][x + 1].item) {
+            spaces[y][x + 1].itemSprite.alpha = 1;
           }
         } else if (i === 2) {
           spaces[y + 1][x].visible = true;
@@ -158,6 +212,9 @@ export default {
           spaces[y + 1][x].muckSprite.alpha = .4;
           spaces[y + 1][x].muckSprite.frame = spaces[y + 1][x].muck - 1;
         }
+        if (spaces[y + 1][x].item) {
+          spaces[y + 1][x].itemSprite.alpha = 1;
+        }
         } else if (i === 3) {
           spaces[y][x - 1].visible = true;
           if (!spaces[y][x - 1].sprite) {
@@ -167,6 +224,9 @@ export default {
           if (spaces[y][x - 1].muck) {
             spaces[y][x - 1].muckSprite.alpha = .4;
             spaces[y][x - 1].muckSprite.frame = spaces[y][x - 1].muck - 1;
+          }
+          if (spaces[y][x - 1].item) {
+            spaces[y][x - 1].itemSprite.alpha = 1;
           }
         }
       }
