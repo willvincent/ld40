@@ -403,9 +403,54 @@ export namespace Audio {
         static getMP3(): string { return require('assets/audio/music.mp3'); }
         static getOGG(): string { return require('assets/audio/music.ogg'); }
     }
+    export class AudiospritesFlare {
+        static getName(): string { return 'flare'; }
+
+        static getMP3(): string { return require('assets/audiosprites/flare.mp3'); }
+        static getOGG(): string { return require('assets/audiosprites/flare.ogg'); }
+    }
+    export class AudiospritesFootsteps {
+        static getName(): string { return 'footsteps'; }
+
+        static getMP3(): string { return require('assets/audiosprites/footsteps.mp3'); }
+        static getOGG(): string { return require('assets/audiosprites/footsteps.ogg'); }
+    }
+    export class AudiospritesPlayerSounds {
+        static getName(): string { return 'player-sounds'; }
+
+        static getMP3(): string { return require('assets/audiosprites/player-sounds.mp3'); }
+        static getOGG(): string { return require('assets/audiosprites/player-sounds.ogg'); }
+    }
+    export class AudiospritesSpawn {
+        static getName(): string { return 'spawn'; }
+
+        static getMP3(): string { return require('assets/audiosprites/spawn.mp3'); }
+        static getOGG(): string { return require('assets/audiosprites/spawn.ogg'); }
+    }
+    export class AudiospritesWinLose {
+        static getName(): string { return 'win-lose'; }
+
+        static getMP3(): string { return require('assets/audiosprites/win-lose.mp3'); }
+        static getOGG(): string { return require('assets/audiosprites/win-lose.ogg'); }
+    }
 }
 
 export namespace Audiosprites {
+    enum AudiospritesBitesSprites {
+        Bite1 = <any>'bite1',
+        Bite2 = <any>'bite2',
+        Bite3 = <any>'bite3',
+        Bite4 = <any>'bite4',
+    }
+    export class AudiospritesBites {
+        static getName(): string { return 'bites'; }
+
+        static getJSON(): string { return require('assets/audiosprites/bites.json'); }
+        static getMP3(): string { return require('assets/audiosprites/bites.mp3'); }
+        static getOGG(): string { return require('assets/audiosprites/bites.ogg'); }
+
+        static Sprites = AudiospritesBitesSprites;
+    }
     enum AudiospritesSfxSprites {
         Laser1 = <any>'laser1',
         Laser2 = <any>'laser2',

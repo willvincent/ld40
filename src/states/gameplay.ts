@@ -21,8 +21,20 @@ export default class Gameplay extends Phaser.State {
   private groups;
   private googleFontText: Phaser.Text = null;
 
+  private biteSoundSprite;
+  private biteSounds;
+
   public create(): void {
-    console.log(Assets.GoogleWebFonts);
+
+    this.biteSoundSprite = this.game.add.audioSprite(Assets.Audiosprites.AudiospritesBites.getName());
+    let availableBites = Assets.Audiosprites.AudiospritesBites.Sprites;
+    this.biteSounds = [
+      availableBites.Bite1,
+      availableBites.Bite2,
+      availableBites.Bite3,
+      availableBites.Bite4,
+    ];
+
     this.game.world.setBounds(0, 0, (64 * this.mazeWidth), (64 * this.mazeHeight));
 
     // Define sprite layer groups:
@@ -166,6 +178,8 @@ export default class Gameplay extends Phaser.State {
               setTimeout(() => {
                 blood.destroy();
               }, 125);
+
+              this.biteSoundSprite.play(Phaser.ArrayUtils.getRandomItem(this.biteSounds));
             }
           }
         }

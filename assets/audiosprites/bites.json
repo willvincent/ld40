@@ -1,0 +1,28 @@
+{
+  "resources": [
+    "bites.ogg",
+    "bites.mp3"
+  ],
+  "spritemap": {
+    "bite1": {
+      "start": 0.160,
+      "end": 1.475,
+      "loop": false
+    },
+    "bite2": {
+      "start": 1.72,
+      "end": 2.93,
+      "loop": false
+    },
+    "bite3": {
+      "start": 3.13,
+      "end": 3.7,
+      "loop": false
+    },
+    "bite4": {
+      "start": 3.9,
+      "end": 4.5,
+      "loop": false
+    }
+  }
+}
