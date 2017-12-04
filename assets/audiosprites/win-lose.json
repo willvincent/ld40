@@ -1,0 +1,18 @@
+{
+  "resources": [
+    "win-lose.ogg",
+    "win-lose.mp3"
+  ],
+  "spritemap": {
+    "win": {
+      "start": 0.140,
+      "end": 3.3,
+      "loop": false
+    },
+    "lose": {
+      "start": 3.65,
+      "end": 6.2,
+      "loop": false
+    }
+  }
+}

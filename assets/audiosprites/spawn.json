@@ -1,0 +1,13 @@
+{
+  "resources": [
+    "spawn.ogg",
+    "spawn.mp3"
+  ],
+  "spritemap": {
+    "spawn": {
+      "start": 0.2,
+      "end": 3,
+      "loop": false
+    }
+  }
+}

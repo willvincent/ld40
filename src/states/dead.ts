@@ -3,8 +3,12 @@ import * as AssetUtils from '../utils/assetUtils';
 
 export default class Dead extends Phaser.State {
   private googleFontText: Phaser.Text = null;
+  private loseSoundSprite;
 
   public create(): void {
+
+    this.loseSoundSprite = this.game.add.audioSprite(Assets.Audiosprites.AudiospritesWinLose.getName());
+
     this.googleFontText = this.game.add.text(this.game.width / 2, this.game.height / 2, 'You Died.. :(', {
       font: '50px ' + Assets.GoogleWebFonts.PressStart2P,
       fill: '#AA0000',
@@ -14,6 +18,7 @@ export default class Dead extends Phaser.State {
     this.googleFontText.alpha = 0;
     this.googleFontText.fixedToCamera = true;
     this.game.add.tween(this.googleFontText).to({ alpha: 1 }, 1500, Phaser.Easing.Exponential.In, true);
+    this.loseSoundSprite.play(Assets.Audiosprites.AudiospritesWinLose.Sprites.Lose);
     setTimeout(() => this.game.add.tween(this.googleFontText).to({ alpha: 0 }, 1500, Phaser.Easing.Exponential.Out, true), 6500);
     setTimeout(() => {
       this.googleFontText.destroy();

@@ -1,0 +1,73 @@
+{
+  "resources": [
+    "player-sounds.ogg",
+    "player-sounds.mp3"
+  ],
+  "spritemap": {
+    "muck1": {
+      "start": 0.18,
+      "end": 0.7,
+      "loop": false
+    },
+    "muck2": {
+      "start": 0.92,
+      "end": 1.73,
+      "loop": false
+    },
+    "muck3": {
+      "start": 1.87,
+      "end": 2.83,
+      "loop": false
+    },
+    "muck4": {
+      "start": 2.96,
+      "end": 4.23,
+      "loop": false
+    },
+    "hurt1": {
+      "start": 2.94,
+      "end": 4.18,
+      "loop": false
+    },
+    "hurt2": {
+      "start": 4.336,
+      "end": 4.89,
+      "loop": false
+    },
+    "hurt3": {
+      "start": 5,
+      "end": 5.64,
+      "loop": false
+    },
+    "hurt4": {
+      "start": 5.8,
+      "end": 6.94,
+      "loop": false
+    },
+    "hurt5": {
+      "start": 7.12,
+      "end": 7.7,
+      "loop": false
+    },
+    "hurt6": {
+      "start": 8,
+      "end": 8.57,
+      "loop": false
+    },
+    "hurt7": {
+      "start": 8.98,
+      "end": 9.5,
+      "loop": false
+    },
+    "health": {
+      "start": 9.6,
+      "end": 10.77,
+      "loop": false
+    },
+    "flare": {
+      "start": 11.07,
+      "end": 11.8,
+      "loop": false
+    }
+  }
+}

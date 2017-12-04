@@ -1,0 +1,33 @@
+{
+  "resources": [
+    "footsteps.ogg",
+    "footsteps.mp3"
+  ],
+  "spritemap": {
+    "step1": {
+      "start": 0.91,
+      "end": 1.665,
+      "loop": false
+    },
+    "step2": {
+      "start": 2,
+      "end": 3,
+      "loop": false
+    },
+    "step3": {
+      "start": 3.3,
+      "end": 3.99,
+      "loop": false
+    },
+    "step4": {
+      "start": 4.3,
+      "end": 4.9,
+      "loop": false
+    },
+    "step5": {
+      "start": 5,
+      "end": 5.7,
+      "loop": false
+    }
+  }
+}

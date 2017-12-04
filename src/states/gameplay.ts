@@ -24,15 +24,69 @@ export default class Gameplay extends Phaser.State {
   private biteSoundSprite;
   private biteSounds;
 
+  private playerSoundSprite;
+  private playerHurtSounds;
+  private playerMuckSounds;
+  private playerHealthSound;
+  private playerFlareSound;
+
+  private footstepsSoundSprite;
+  private footstepSounds;
+
+  private flareSoundSprite;
+  private spawnSoundSprite;
+
   public create(): void {
 
+    this.flareSoundSprite = this.game.add.audioSprite(Assets.Audiosprites.AudiospritesFlare.getName());
+    this.spawnSoundSprite = this.game.add.audioSprite(Assets.Audiosprites.AudiospritesSpawn.getName());
+
     this.biteSoundSprite = this.game.add.audioSprite(Assets.Audiosprites.AudiospritesBites.getName());
+    this.biteSoundSprite.allowMultiple = true;
     let availableBites = Assets.Audiosprites.AudiospritesBites.Sprites;
     this.biteSounds = [
       availableBites.Bite1,
       availableBites.Bite2,
       availableBites.Bite3,
       availableBites.Bite4,
+    ];
+
+    this.playerSoundSprite = this.game.add.audioSprite(Assets.Audiosprites.AudiospritesPlayerSounds.getName());
+    this.playerSoundSprite.allowMultiple = false;
+    let availablePS = Assets.Audiosprites.AudiospritesPlayerSounds.Sprites;
+    this.playerMuckSounds = [
+      availablePS.Muck1,
+      availablePS.Muck2,
+      availablePS.Muck3,
+      availablePS.Muck4,
+    ];
+
+    this.playerHurtSounds = [
+      availablePS.Hurt1,
+      availablePS.Hurt2,
+      availablePS.Hurt3,
+      availablePS.Hurt4,
+      availablePS.Hurt5,
+      availablePS.Hurt6,
+      availablePS.Hurt7,
+    ];
+
+    this.playerFlareSound = [
+      availablePS.Flare,
+    ];
+    this.playerHealthSound = [
+      availablePS.Health,
+    ];
+
+    this.footstepsSoundSprite = this.game.add.audioSprite(Assets.Audiosprites.AudiospritesFootsteps.getName());
+    this.footstepsSoundSprite.allowMultiple = true;
+    let availableFS = Assets.Audiosprites.AudiospritesFootsteps.Sprites;
+    this.footstepSounds = [
+      availableFS.Step1,
+      availableFS.Step2,
+      availableFS.Step3,
+      availableFS.Step4,
+      availableFS.Step5,
     ];
 
     this.game.world.setBounds(0, 0, (64 * this.mazeWidth), (64 * this.mazeHeight));
@@ -112,7 +166,7 @@ export default class Gameplay extends Phaser.State {
       }
     }, 2350);
 
-    Maze.visitCell(this.player, this.spaces, this.groups);
+    Maze.visitCell(this.player, this.spaces, this.groups, {muck: this.playerMuckSounds, health: this.playerHealthSound, flare: this.playerFlareSound, sprite: this.playerSoundSprite});
 
     // Movement handling
     const upKey = this.game.input.keyboard.addKey(Phaser.Keyboard.UP);
@@ -124,6 +178,7 @@ export default class Gameplay extends Phaser.State {
     spaceKey.onDown.add(() => {
       if (this.player.flares && !this.flareActive) {
         console.log('Throwing a Flare!');
+        this.flareSoundSprite.play(Assets.Audiosprites.AudiospritesFlare.Sprites.Flare);
         this.player.flares--;
         this.flareActive = true;
         Maze.throwFlare(this.game);
@@ -180,6 +235,7 @@ export default class Gameplay extends Phaser.State {
               }, 125);
 
               this.biteSoundSprite.play(Phaser.ArrayUtils.getRandomItem(this.biteSounds));
+              this.playerSoundSprite.play(Phaser.ArrayUtils.getRandomItem(this.playerHurtSounds));
             }
           }
         }
@@ -214,6 +270,7 @@ export default class Gameplay extends Phaser.State {
         // setTimeout(() => this.creatures.splice(0, num), 500);
       } else {
         let num = (this.player.muck - this.creatures.length);
+        this.spawnSoundSprite.play(Assets.Audiosprites.AudiospritesSpawn.Sprites.Spawn);
         for (let i = 0; i < num; i++) {
           Creature.spawn(this.mazeWidth, this.mazeHeight, this.groups, this.creatures);
         }
@@ -227,6 +284,7 @@ export default class Gameplay extends Phaser.State {
   }
 
   private move(direction): void {
+    this.footstepsSoundSprite.play(Phaser.ArrayUtils.getRandomItem(this.footstepSounds));
     switch (direction) {
       case 'up':
         this.game.add.tween(this.player.sprite).to({ angle: -90 }, 20, Phaser.Easing.Linear.None, true);
@@ -243,7 +301,7 @@ export default class Gameplay extends Phaser.State {
             true);
           setTimeout(() => {
             this.player.sprite.animations.stop(this.player.sprite.animations.currentCell, false);
-            Maze.visitCell(this.player, this.spaces, this.groups);
+            Maze.visitCell(this.player, this.spaces, this.groups, {muck: this.playerMuckSounds, health: this.playerHealthSound, flare: this.playerFlareSound, sprite: this.playerSoundSprite});
           }, this.playerSpeed + Math.floor(Math.random() * 100));
         }
         break;
@@ -262,7 +320,7 @@ export default class Gameplay extends Phaser.State {
             true);
           setTimeout(() => {
             this.player.sprite.animations.stop(this.player.sprite.animations.currentCell, false);
-            Maze.visitCell(this.player, this.spaces, this.groups);
+            Maze.visitCell(this.player, this.spaces, this.groups, {muck: this.playerMuckSounds, health: this.playerHealthSound, flare: this.playerFlareSound, sprite: this.playerSoundSprite});
           }, this.playerSpeed + Math.floor(Math.random() * 100));
         }
         break;
@@ -281,7 +339,7 @@ export default class Gameplay extends Phaser.State {
             true);
           setTimeout(() => {
             this.player.sprite.animations.stop(this.player.sprite.animations.currentCell, false);
-            Maze.visitCell(this.player, this.spaces, this.groups);
+            Maze.visitCell(this.player, this.spaces, this.groups, {muck: this.playerMuckSounds, health: this.playerHealthSound, flare: this.playerFlareSound, sprite: this.playerSoundSprite});
           }, this.playerSpeed + Math.floor(Math.random() * 100));
         }
         break;
@@ -300,7 +358,7 @@ export default class Gameplay extends Phaser.State {
             true);
           setTimeout(() => {
             this.player.sprite.animations.stop(this.player.sprite.animations.currentCell, false);
-            Maze.visitCell(this.player, this.spaces, this.groups);
+            Maze.visitCell(this.player, this.spaces, this.groups, {muck: this.playerMuckSounds, health: this.playerHealthSound, flare: this.playerFlareSound, sprite: this.playerSoundSprite});
           }, this.playerSpeed + Math.floor(Math.random() * 100));
 
         }

@@ -131,7 +131,7 @@ export default {
     }
   },
 
-  visitCell(player, spaces, groups) {
+  visitCell(player, spaces, groups, sounds) {
     const y = player.location[0];
     const x = player.location[1];
     spaces[y][x].visible = true;
@@ -142,14 +142,15 @@ export default {
     }
     spaces[y][x].sprite.play('flicker');
 
-    // TODO: We should play a sound and maybe some sort of text feedback for these..
     if (spaces[y][x].item) {
       if (spaces[y][x].item === 'flare') {
         console.log('Sweet! A flare!');
+        sounds.sprite.play(Phaser.ArrayUtils.getRandomItem(sounds.flare));
         player.flares++;
         if (player.flares > 5) player.flares = 5;
       } else {
         console.log('Ahh, health. Nice.');
+        sounds.sprite.play(Phaser.ArrayUtils.getRandomItem(sounds.health));
         player.health += 25;
         if (player.health > 100) {
           player.health = 100;
@@ -159,11 +160,11 @@ export default {
       spaces[y][x].itemSprite.destroy();
     }
 
-    // TODO: We should play a sound and maybe some sort of text feedback for these..
     if (spaces[y][x].muck) {
       player.muck += 3;
       if (player.muck > 100) player.muck = 100;
       console.log('Eww, I stepped in something...');
+      sounds.sprite.play(Phaser.ArrayUtils.getRandomItem(sounds.muck));
       spaces[y][x].muck--;
       if (spaces[y][x].muck === 0) {
         spaces[y][x].muckSprite.destroy();

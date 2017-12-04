@@ -4,8 +4,11 @@ import * as AssetUtils from '../utils/assetUtils';
 export default class Winner extends Phaser.State {
   private googleFontText: Phaser.Text = null;
   private googleFontText2: Phaser.Text = null;
+  private winSoundSprite;
 
   public create(): void {
+    this.winSoundSprite = this.game.add.audioSprite(Assets.Audiosprites.AudiospritesWinLose.getName());
+
     this.googleFontText = this.game.add.text(this.game.width / 2, (this.game.height / 2) - 30, 'Winner, Winner...', {
       font: '50px ' + Assets.GoogleWebFonts.PressStart2P,
       fill: '#00AA00',
@@ -24,6 +27,7 @@ export default class Winner extends Phaser.State {
     this.googleFontText2.fixedToCamera = true;
     this.game.add.tween(this.googleFontText).to({ alpha: 1 }, 1500, Phaser.Easing.Exponential.In, true);
     this.game.add.tween(this.googleFontText2).to({ alpha: 1 }, 1500, Phaser.Easing.Exponential.In, true, 2500);
+    setTimeout(() => this.winSoundSprite.play(Assets.Audiosprites.AudiospritesWinLose.Sprites.Win), 2000);
     setTimeout(() => {
       this.game.add.tween(this.googleFontText).to({ alpha: 0 }, 1500, Phaser.Easing.Exponential.Out, true);
       this.game.add.tween(this.googleFontText2).to({ alpha: 0 }, 1500, Phaser.Easing.Exponential.Out, true);

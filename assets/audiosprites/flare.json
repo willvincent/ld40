@@ -1,0 +1,13 @@
+{
+  "resources": [
+    "flare.ogg",
+    "flare.mp3"
+  ],
+  "spritemap": {
+    "flare": {
+      "start": 0.3,
+      "end": 3.9,
+      "loop": false
+    }
+  }
+}
