@@ -10,6 +10,8 @@ This game was created as part of the Ludum Dare 40, Dec 1 - 3, 2017.
 
 The theme: _The more you have, the worse it is_
 
+Game page: https://ldjam.com/events/ludum-dare/40/maze-trudger
+
 
 ## Game Objective
 
